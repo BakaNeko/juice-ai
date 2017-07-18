@@ -14,17 +14,19 @@ function postFart() {
 		{
 			type: "text", //the type
 			title: "fart", //the title
-			body: "" //nothing, leaving this for future reference
+			body: "", //nothing, leaving this for future reference
+			tags: "17776,17776 football,17776 juice,this post is from an automated bot"
 		},
 		function(err, json){
 			if(err) throw err; //oy
+		console.log("fart\n");
 		}
 	);
-	console.log("fart\n")
 }
 
 while(true) {
 	var now = new Date().getUTCHours() + ":" + new Date().getUTCMinutes();
+	now = "4:10";
 	if(now == "4:10") postFart();
 	sleep(57000); //3 seconds to spare for program lag
 }
