@@ -1,13 +1,30 @@
-var tumblr = require('tumblr');
+var tumblrwks = require("tumblrwks");
+var sleep = require("system-sleep");
 
-var oauth = {
-  consumer_key: '5oZIvD8mfO8S61Pya3sF5a3rmPCypHX6AygHsNRmWDCiurR26B',
-  consumer_secret: 'aKdV89OvlB1A3mbieZTseOtFoblOXn5wB4E2bZ9SzWT8COPTND',
-  token: 'sxkprwwPdQZByfNouSjShiAU8HVFbtkaP7Q5knbGdKH9qTh5Cc',
-  token_secret: 'Ik3cO1JLda0xsvcnlbDZcrsGj7sXAKXf6dGWJvBrnfGr2an6gq'
-};
+var tumblr = new tumblrwks({
+	consumerKey: "5oZIvD8mfO8S61Pya3sF5a3rmPCypHX6AygHsNRmWDCiurR26B",
+	consumerSecret: "aKdV89OvlB1A3mbieZTseOtFoblOXn5wB4E2bZ9SzWT8COPTND",
+	accessToken: "sxkprwwPdQZByfNouSjShiAU8HVFbtkaP7Q5knbGdKH9qTh5Cc",
+	accessSecret: "Ik3cO1JLda0xsvcnlbDZcrsGj7sXAKXf6dGWJvBrnfGr2an6gq"
+}, "juice-ai.tumblr.com");
 
-var blog = new tumblr.Blog("juice-ai.tumblr.com", oauth);
-blog.text([], function(err, data) {
-	console.log(data.posts);
-});
+function postFart() {
+	console.log(new Date());
+	tumblr.post("/post",
+		{
+			type: "text", //the type
+			title: "fart", //the title
+			body: "" //nothing, leaving this for future reference
+		},
+		function(err, json){
+			if(err) throw err; //oy
+		}
+	);
+	console.log("fart\n")
+}
+
+while(true) {
+	var now = new Date().getUTCHours() + ":" + new Date().getUTCMinutes();
+	if(now == "4:10") postFart();
+	sleep(57000); //3 seconds to spare for program lag
+}
