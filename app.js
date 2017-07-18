@@ -24,10 +24,11 @@ function postFart() {
 	);
 }
 
+
+console.log("Starting now.");
+
 while(true) {
 	var now = new Date().getUTCHours() + ":" + new Date().getUTCMinutes();
 	if(now == "4:10") postFart();
 	sleep(57000); //3 seconds to spare for program lag
 }
-
-console.log("Starting now.");
