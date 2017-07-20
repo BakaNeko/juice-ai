@@ -19,16 +19,32 @@ function postFart() {
 		},
 		function(err, json){
 			if(err) throw err; //oy
-		console.log("fart\n");
+			console.log("fart\n");
 		}
 	);
 }
 
-
 console.log("Starting now.");
 
+var date;
 while(true) {
-	var now = new Date().getUTCHours() + ":" + new Date().getUTCMinutes();
-	if(now == "4:10") postFart();
-	sleep(57000); //3 seconds to spare for program lag
+	date = new Date();
+	var hour = date.getUTCHours();
+	var minute = date.getUTCMinutes();
+
+	//sleep system:
+
+	if(!(hour == 3 && minute >= 30) && hour != 4) sleep(1000 * 60 * 30); //if it's not 3 or 4, wait half an hour
+	else { //if it's either past 3 and a half or 4
+		if(hour == 3) { //if the hour is past 3 and a half
+			sleep(1000 * 60 * 5); //if it's past 3 and a half, wait five minutes
+		}
+		else { //if the hour is 4
+			if(minute == 10) {
+				postFart(); //if it's 4:10!
+				sleep(1000 * 60 * 60 * 21); //wait 21 hours
+			}
+			else sleep(1000 * 60 * 0.25); //if it's not 4:10 yet, wait 15 seconds
+		}
+	}
 }
